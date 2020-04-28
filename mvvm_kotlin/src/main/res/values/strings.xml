@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ArchDemo</string>
+
+    <string name="button_visible">SET VISIBLE</string>
+    <string name="button_invisible">SET INVISIBLE</string>
+
+    <string name="checkbox_checked">CHECKED</string>
+    <string name="checkbox_unchecked">UNCHECKED</string>
+</resources>

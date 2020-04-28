@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="android.view.View"/>
+        <variable name="viewModel" type="com.github.hyeyeon2371.archdemo2.data.viewmodel.MainViewModel"/>
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent" android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <TextView android:layout_width="match_parent" android:layout_height="50dp"
+                      android:gravity="center"
+                      android:background="@color/colorPrimary"
+                      android:textColor="@android:color/white"
+                      android:layout_gravity="center_horizontal"
+                      android:textSize="20sp"
+                      android:textStyle="bold"
+                      android:text="MVVM Demo (Java)"/>
+
+            <LinearLayout
+                    android:layout_margin="20dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context=".view.activity.MainActivity">
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                              android:layout_marginTop="20dp"
+                              android:orientation="horizontal">
+
+                    <!-- Visibility -->
+                    <LinearLayout android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:orientation="vertical">
+
+                        <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@mipmap/ic_launcher"
+                                android:visibility="@{viewModel.imgVisible ? View.VISIBLE : View.INVISIBLE, default = visible}"/>
+                        <Button
+                                android:id="@+id/button"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="140dp"
+                                android:layout_gravity="center"
+                                android:layout_height="wrap_content"
+                                android:onClick="@{()->viewModel.onClickImageButton()}"
+                                android:text="@{!viewModel.imgVisible ? @string/button_visible : @string/button_invisible, default = @string/button_visible}"/>
+                    </LinearLayout>
+
+                    <!-- Checkbox -->
+                    <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:layout_marginStart="20dp"
+                              android:text="@{viewModel.isChecked ? @string/checkbox_checked : @string/checkbox_unchecked, default=@string/checkbox_unchecked}"
+                              android:checked="false"
+                              android:onCheckedChanged="@{(view, checked) -> viewModel.onChecked(checked)}"/>
+
+                </LinearLayout>
+
+                <!-- SeekBar -->
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_marginTop="20dp"
+                              android:layout_height="wrap_content"
+                              android:orientation="vertical">
+
+                    <SeekBar android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:progress="@={viewModel.progress}"/>
+
+                    <Button android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Show progress value"
+                            android:onClick="@{()->viewModel.showProgress()}"/>
+                </LinearLayout>
+
+                <!-- List -->
+                <LinearLayout
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:orientation="horizontal"
+                                  android:layout_gravity="center_horizontal"
+                                  android:layout_height="wrap_content">
+                        <EditText android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/editText"
+                                  android:layout_weight="1"
+                                  android:text="@={viewModel.input}"
+                                  android:hint="Input text"
+                                  android:textSize="16sp"/>
+                        <Button android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:onClick="@{()->viewModel.onClickInputButton()}"
+                                android:text="Add List"/>
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

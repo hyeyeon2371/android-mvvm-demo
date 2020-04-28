@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <data>
+        <variable name="item" type="com.github.hyeyeon2371.archdemo.data.model.ListItem"/>
+        <variable name="viewModel" type="com.github.hyeyeon2371.archdemo.data.viewmodel.MainViewModel"/>
+    </data>
+
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:onClick="@{()->viewModel.onClickListItem(item)}"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <TextView
+                android:text="@{String.valueOf(item.position)}"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/textView_position"/>
+
+        <TextView
+                android:text="@{item.text}"
+                android:layout_marginStart="4dp"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/textView_text"/>
+
+    </LinearLayout>
+
+
+</layout>
